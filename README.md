@@ -60,7 +60,7 @@ The application will be accessible in your web browser at `http://localhost:8501
 | Wrong Decisions   | 26  | 0    |
 
 ## Youtube Video
-Feel free to check our youtube Demo : https://youtu.be/NvtjVLcBGwA
+Feel free to check our youtube Demo : [https://youtu.be/YD9-2WWM8JM](https://youtu.be/YD9-2WWM8JM)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
