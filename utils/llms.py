@@ -2,6 +2,25 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_community.llms import Ollama
 
+def generate_smart_query(stock,company_info,sector_info):
+    llm = Ollama(model="llama3")
+
+    query_template = """
+    Generate a search phrase under 20 words incorporating keywords seperated by comma which can be used to find news and updates that may influence investment sentiment for the stock '{stock}'. 
+    Use the provided company and sector information to guide the creation of the query.  
+    Company Information: {company_info}  
+    Sector Information: {sector_info}  
+    Search Query:  """ 
+
+    # Create the chain
+    chain = LLMChain(llm=llm, prompt=PromptTemplate(template=query_template, input_variables=["stock", "company_info", "sector_info"]))
+
+    # Run the chain to get the search query
+    query =  chain.run(stock=stock, company_info=company_info, sector_info=sector_info) 
+
+    return query
+
+
 def generate_overall_summary(stock, news_df):
     llm = Ollama(model="llama3")
 
@@ -128,41 +147,3 @@ def get_trading_recommendation(sector_info, date, table_string, summary):
     trade = chain.run(sector_info=sector_info, date=date, table_string=table_string, summary=summary)
 
     return trade
-
-def get_trading_recommendation_on_current_holding(holding, sector_info, date, table_string, summary):
-
-    llm = Ollama(model="llama3")
-
-    trade_template = """
-    As an expert trading agent with extensive experience in trading Nvidia stock, analyze the following information:
-
-    Sector: {sector_info}
-    Date: {date}
-    Recent Stock Performance:
-    {table_string}
-
-    Recent News Summary:
-    {summary}
-
-    Based on the provided data, please offer an investment decision. Consider factors such as:
-    1. Current market trends in the technology sector
-    2. Nvidia's recent stock price momentum
-    3. Potential impact of the news on stock performance
-
-    Provide your analysis using the following format:
-
-    Decision: (Buy/Sell/Hold)
-    Reasoning: (Explain your decision in 3-5 concise points)
-    Confidence Level: (Low/Medium/High)
-
-    Answer:
-    """
-
-    trade_prompt = PromptTemplate(template=trade_template, input_variables=["sector_info", "date", "table_string", "summary"])
-
-    chain = LLMChain(llm=llm, prompt=trade_prompt)
-
-    trade = chain.run(sector_info=sector_info, date=date, table_string=table_string, summary=summary)
-
-    return trade
-
