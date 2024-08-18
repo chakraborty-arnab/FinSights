@@ -52,12 +52,22 @@ streamlit run app.py
 ```
 The application will be accessible in your web browser at `http://localhost:8501`.
 
-# Results
+## Results
 
-| Type of Decision  | Buy | Sell |
-|------------------ |-----|------|
-| Correct Decisions | 34  | 5    |
-| Wrong Decisions   | 26  | 0    |
+# Correct Decision
+
+| Decision | Confidence Level | Count |
+|----------|------------------|-------|
+| Buy      | High             | 82    |
+| Buy      | Medium           | 76    |
+| Sell     | Medium           | 6     |
+
+# Wrong Decision
+
+| Decision | Confidence Level | Count |
+|----------|------------------|-------|
+| Sell     | Low              | 0     |
+| Buy      | Medium           | 58    |
 
 ## Youtube Video
 Feel free to check our youtube Demo : [https://youtu.be/YD9-2WWM8JM](https://youtu.be/YD9-2WWM8JM)
